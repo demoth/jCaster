@@ -1,40 +1,63 @@
 <project name="jCaster" default="all" basedir=".">
-    <description>
-        Ant build file for jCaster client
-    </description>
-  <!-- set global properties for this build -->
-  <property name="src" location="src"/>
-  <property name="build" location="build"/>
-  <property name="dist"  location="dist"/>
-  <property name="lib" location="lib"/>
+	<description>
+	Ant build file for jCaster client
+	</description>
+	<!-- set global properties for this build -->
+	<property name="src" location="src"/>
+	<property name="build" location="build"/>
+	<property name="dist"  location="dist"/>
+	<property name="lib" location="lib"/>
 
-  <target name="init">
-    <!-- Create the time stamp -->
-    <tstamp/>
-    <!-- Create the build directory structure used by compile -->
-    <mkdir dir="${build}"/>
-  </target>
+	<property name="jme3.url" value="http://jmonkeyengine.com/nightly/"/>
+	<property name="jme3.version" value="jME3_2013-03-05.zip"/>
+	<property name="jme3.allow-download" value="true"/>
 
-  <target name="compile" depends="init"
-        description="compile the source " >
-    <!-- Compile the java code from ${src} into ${build} -->
-    <javac srcdir="${src}" destdir="${build}"/>
-  </target>
+	<target name="init">
+		<!-- Create the time stamp -->
+		<tstamp/>
+		<buildnumber/>
+		<!-- Create the build directory structure used by compile -->
+		<mkdir dir="${build}"/>
+	</target>
+	
+	<target name="check-need-download-jme3">
+	  <condition property="jme3.download.required">
+	    <and>
+			<!-- Checks if Downloadstatusvariable variable is true -->
+			<istrue value="${jme3.allow-download}"/>
+	      <not>
+			<!-- Checks if file is present in filesystem -->
+			<available file="${my.file}"/>
+	      </not>
+	    </and>
+	  </condition>
+	</target>
 
-  <target name="dist" depends="compile"
-        description="generate the distribution" >
-    <!-- Create the distribution directory -->
-    <mkdir dir="${dist}/lib"/>
+	<target name="fetch-libs" depends="check-need-download-jme3" if="jme3.download.required">
+		<get src="${jme3.url}${jme3.version}" dest="${jme3.version}"/>
+	</target>
 
-    <!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
-    <jar jarfile="${dist}/lib/MyProject-${DSTAMP}.jar" basedir="${build}"/>
-  </target>
 
-  <target name="clean"
-        description="clean up" >
-    <!-- Delete the ${build} and ${dist} directory trees -->
-    <delete dir="${build}"/>
-    <delete dir="${dist}"/>
-  </target>
+	<target name="compile" depends="init"
+	description="compile the source " >
+		<!-- Compile the java code from ${src} into ${build} -->
+		<javac srcdir="${src}" destdir="${build}"/>
+	</target>
+
+	<target name="dist" depends="compile"
+	description="generate the distribution" >
+		<!-- Create the distribution directory -->
+		<mkdir dir="${dist}/lib"/>
+
+		<!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
+		<jar jarfile="${dist}/lib/MyProject-${DSTAMP}.jar" basedir="${build}"/>
+	</target>
+
+	<target name="clean"
+	description="clean up" >
+		<!-- Delete the ${build} and ${dist} directory trees -->
+		<delete dir="${build}"/>
+		<delete dir="${dist}"/>
+	</target>
 </project>
 
