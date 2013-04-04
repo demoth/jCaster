@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="jcaster" default="all">
+  
+  
+  <property file="jcaster.properties"/>
+  <!-- Uncomment the following property if no tests compilation is needed -->
+  <!-- 
+  <property name="skip.tests" value="true"/>
+   -->
+  
+  <!-- Compiler options -->
+  
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.generate.no.warnings" value="off"/>
+  <property name="compiler.args" value=""/>
+  <property name="compiler.max.memory" value="128m"/>
+  <patternset id="ignored.files">
+    <exclude name="**/CVS/**"/>
+    <exclude name="**/SCCS/**"/>
+    <exclude name="**/RCS/**"/>
+    <exclude name="**/rcs/**"/>
+    <exclude name="**/.DS_Store/**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/.pyc/**"/>
+    <exclude name="**/.pyo/**"/>
+    <exclude name="**/*.pyc/**"/>
+    <exclude name="**/*.pyo/**"/>
+    <exclude name="**/.git/**"/>
+    <exclude name="**/*.hprof/**"/>
+    <exclude name="**/_svn/**"/>
+    <exclude name="**/.hg/**"/>
+    <exclude name="**/*.lib/**"/>
+    <exclude name="**/*~/**"/>
+    <exclude name="**/__pycache__/**"/>
+    <exclude name="**/.bundle/**"/>
+    <exclude name="**/*.rbc/**"/>
+  </patternset>
+  <patternset id="library.patterns">
+    <include name="*.zip"/>
+    <include name="*.apk"/>
+    <include name="*.war"/>
+    <include name="*.egg"/>
+    <include name="*.ear"/>
+    <include name="*.swc"/>
+    <include name="*.jar"/>
+  </patternset>
+  <patternset id="compiler.resources">
+    <include name="**/?*.properties"/>
+    <include name="**/?*.xml"/>
+    <include name="**/?*.gif"/>
+    <include name="**/?*.png"/>
+    <include name="**/?*.jpeg"/>
+    <include name="**/?*.jpg"/>
+    <include name="**/?*.html"/>
+    <include name="**/?*.dtd"/>
+    <include name="**/?*.tld"/>
+    <include name="**/?*.ftl"/>
+  </patternset>
+  
+  <!-- JDK definitions -->
+  
+  <property name="jdk.bin.1.7" value="${jdk.home.1.7}/bin"/>
+  <path id="jdk.classpath.1.7">
+    <fileset dir="${jdk.home.1.7}">
+      <include name="jre/lib/jce.jar"/>
+      <include name="jre/lib/jsse.jar"/>
+      <include name="jre/lib/charsets.jar"/>
+      <include name="jre/lib/jfr.jar"/>
+      <include name="jre/lib/rt.jar"/>
+      <include name="jre/lib/plugin.jar"/>
+      <include name="jre/lib/deploy.jar"/>
+      <include name="jre/lib/jfxrt.jar"/>
+      <include name="jre/lib/javaws.jar"/>
+      <include name="jre/lib/management-agent.jar"/>
+      <include name="jre/lib/alt-rt.jar"/>
+      <include name="jre/lib/resources.jar"/>
+      <include name="jre/lib/ext/localedata.jar"/>
+      <include name="jre/lib/ext/dnsns.jar"/>
+      <include name="jre/lib/ext/sunjce_provider.jar"/>
+      <include name="jre/lib/ext/zipfs.jar"/>
+      <include name="jre/lib/ext/sunpkcs11.jar"/>
+      <include name="jre/lib/ext/sunec.jar"/>
+    </fileset>
+  </path>
+  
+  <property name="project.jdk.home" value="${jdk.home.1.7}"/>
+  <property name="project.jdk.bin" value="${jdk.bin.1.7}"/>
+  <property name="project.jdk.classpath" value="jdk.classpath.1.7"/>
+  
+  
+  <!-- Project Libraries -->
+  
+  <path id="library.jmonkeyengine3.classpath">
+    <fileset dir="${basedir}/lib/jme3">
+      <patternset refid="library.patterns"/>
+    </fileset>
+    <pathelement location="${basedir}/lib/jMonkeyEngine3.jar"/>
+  </path>
+  
+  <path id="library.json.classpath">
+    <pathelement location="${basedir}/lib/JSON.jar"/>
+  </path>
+  
+  <path id="library.slf4j-api-1.6.6.classpath">
+    <pathelement location="${basedir}/lib/slf4j-api-1.6.6.jar"/>
+    <pathelement location="${basedir}/lib/slf4j-simple-1.6.6.jar"/>
+  </path>
+  
+  <!-- Modules -->
+  
+  
+  <!-- Module JCaster -->
+  
+  <dirname property="module.jcaster.basedir" file="${ant.file}"/>
+  
+  
+  <property name="module.jdk.home.jcaster" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.jcaster" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.jcaster" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.jcaster" value="${compiler.args}"/>
+  
+  <property name="jcaster.output.dir" value="${module.jcaster.basedir}/out/production/JCaster"/>
+  <property name="jcaster.testoutput.dir" value="${module.jcaster.basedir}/out/test/JCaster"/>
+  
+  <path id="jcaster.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="jcaster.module.production.classpath">
+    <path refid="${module.jdk.classpath.jcaster}"/>
+    <path refid="library.json.classpath"/>
+    <path refid="library.jmonkeyengine3.classpath"/>
+    <path refid="library.slf4j-api-1.6.6.classpath"/>
+  </path>
+  
+  <path id="jcaster.runtime.production.module.classpath">
+    <pathelement location="${jcaster.output.dir}"/>
+    <path refid="library.json.classpath"/>
+    <path refid="library.jmonkeyengine3.classpath"/>
+    <path refid="library.slf4j-api-1.6.6.classpath"/>
+  </path>
+  
+  <path id="jcaster.module.classpath">
+    <path refid="${module.jdk.classpath.jcaster}"/>
+    <pathelement location="${jcaster.output.dir}"/>
+    <path refid="library.json.classpath"/>
+    <path refid="library.jmonkeyengine3.classpath"/>
+    <path refid="library.slf4j-api-1.6.6.classpath"/>
+  </path>
+  
+  <path id="jcaster.runtime.module.classpath">
+    <pathelement location="${jcaster.testoutput.dir}"/>
+    <pathelement location="${jcaster.output.dir}"/>
+    <path refid="library.json.classpath"/>
+    <path refid="library.jmonkeyengine3.classpath"/>
+    <path refid="library.slf4j-api-1.6.6.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.jcaster">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.jcaster">
+    <patternset refid="excluded.from.module.jcaster"/>
+  </patternset>
+  
+  <path id="jcaster.module.sourcepath">
+    <dirset dir="${module.jcaster.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.jcaster" depends="compile.module.jcaster.production,compile.module.jcaster.tests" description="Compile module JCaster"/>
+  
+  <target name="compile.module.jcaster.production" description="Compile module JCaster; production classes">
+    <mkdir dir="${jcaster.output.dir}"/>
+    <javac destdir="${jcaster.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.jcaster}/javac">
+      <compilerarg line="${compiler.args.jcaster}"/>
+      <bootclasspath refid="jcaster.module.bootclasspath"/>
+      <classpath refid="jcaster.module.production.classpath"/>
+      <src refid="jcaster.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.jcaster"/>
+    </javac>
+    
+    <copy todir="${jcaster.output.dir}">
+      <fileset dir="${module.jcaster.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.jcaster.tests" depends="compile.module.jcaster.production" description="compile module JCaster; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.jcaster" description="cleanup module">
+    <delete dir="${jcaster.output.dir}"/>
+    <delete dir="${jcaster.testoutput.dir}"/>
+  </target>
+  
+  <target name="init" description="Build initialization">
+    <!-- Perform any build initialization in this target -->
+  </target>
+  
+  <target name="clean" depends="clean.module.jcaster" description="cleanup all"/>
+  
+  <target name="build.modules" depends="init, clean, compile.module.jcaster" description="build all modules"/>
+  
+  <target name="all" depends="build.modules" description="build all"/>
+</project>
