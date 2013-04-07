@@ -6,11 +6,13 @@ Libs are currently used (place them in the lib directory):
   * jmonkeyengine 3
   * JSON libray from json.org
   * slf4j - simple
+
 Jars needed (lib/):
   * jMonkeyEngine3.jar  
   * JSON.jar  
   * slf4j-api-1.6.6.jar  
   * slf4j-simple-1.6.6.jar
+
 Jme3 jars (under lib/jme3):
   * eventbus.jar      
   * jME3-lwjgl.jar          
