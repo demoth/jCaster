@@ -2,23 +2,17 @@ package org.caster.client.gui;
 
 import com.jme3.app.state.AbstractAppState;
 import de.lessvoid.nifty.Nifty;
-import de.lessvoid.nifty.controls.DropDown;
-import de.lessvoid.nifty.controls.TextField;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
-import org.caster.client.WorldModel;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.Queue;
 
 /**
  * Created by IntelliJ IDEA.
  * User: demoth
  * Date: 8/16/12
  * Time: 1:15 AM
+ * Controller for Mainmenu, options, login,
  */
-public class CasterScreenController extends AbstractAppState implements ScreenController {
+public class MenuScreenController extends AbstractAppState implements ScreenController {
 
     @Override
     public void bind(Nifty nifty, Screen screen) {

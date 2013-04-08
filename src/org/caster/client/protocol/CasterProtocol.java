@@ -1,4 +1,6 @@
-package org.caster.client;
+package org.caster.client.protocol;
+
+import org.caster.client.GameData;
 
 /**
  * Created by IntelliJ IDEA.

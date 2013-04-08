@@ -1,4 +1,4 @@
-package org.caster.client;
+package org.caster.client.states;
 
 import com.jme3.app.Application;
 import com.jme3.app.state.AbstractAppState;

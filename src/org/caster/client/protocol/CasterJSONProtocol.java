@@ -1,5 +1,6 @@
-package org.caster.client;
+package org.caster.client.protocol;
 
+import org.caster.client.GameData;
 import org.json.JSONArray;
 
 import java.util.Queue;
