@@ -1,6 +1,5 @@
 package org.caster.client;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,34 +20,19 @@ import java.util.Queue;
  */
 public class ServerReader extends Thread {
 
-    private Queue<JSONArray> in;
+    private Queue<String> in;
     private BufferedReader reader;
     private Logger logger;
 
-    public ServerReader(Queue<JSONArray> in, Socket socket) throws IOException, JSONException {
+    public ServerReader(Queue<String> in, Socket socket) throws IOException, JSONException {
         this.in = in;
         reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         logger = LoggerFactory.getLogger(ServerReader.class);
-        logger.info("OK!");
+        logger.info("ServerReader is up!");
     }
 
     @Override
     public void run() {
-        while (!ClientMain.DONE) {
-            try {
-                while (reader.ready()) {
-                    in.add(new JSONArray(reader.readLine()));
-                }
-                sleep(1000); // wtf - sick?
-            } catch (IOException e) {
-                e.printStackTrace();  //Todo
-            } catch (JSONException e) {
-                e.printStackTrace();  //Todo
-            } catch (InterruptedException e) {
-                e.printStackTrace();  //Todo
-            }
-
-        }
 
     }
 }

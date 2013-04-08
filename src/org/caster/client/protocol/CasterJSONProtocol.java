@@ -1,7 +1,6 @@
 package org.caster.client.protocol;
 
 import org.caster.client.GameData;
-import org.json.JSONArray;
 
 import java.util.Queue;
 
@@ -13,11 +12,11 @@ import java.util.Queue;
  * To change this template use File | Settings | File Templates.
  */
 public class CasterJSONProtocol implements CasterProtocol {
-    private Queue<JSONArray> in;
-    private Queue<JSONArray> out;
+    private Queue<String> in;
+    private Queue<String> out;
     
 
-    public CasterJSONProtocol(Queue<JSONArray> in, Queue<JSONArray> out) {
+    public CasterJSONProtocol(Queue<String> in, Queue<String> out) {
         this.in = in;
         this.out = out;
     }
