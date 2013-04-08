@@ -1,5 +1,7 @@
 package org.caster.client;
 
+import com.jme3.scene.Node;
+
 /**
  * Created by IntelliJ IDEA.
  * User: daniil
@@ -8,7 +10,7 @@ package org.caster.client;
  * To change this template use File | Settings | File Templates.
  */
 public class GameData {
-    public class Player{
-        // todo add
-    }
+    public Node playerNode;
+    public Node worldNode;
+
 }

@@ -72,7 +72,7 @@ public class CasterJSONProtocol implements CasterProtocol {
     }
 
     @Override
-    public void processMessage(String message, GameData data) {
+    public void processMessages(GameData data) {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 }

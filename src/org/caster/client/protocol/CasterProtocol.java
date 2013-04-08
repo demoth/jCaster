@@ -36,5 +36,5 @@ public interface CasterProtocol {
     ////////////////////
     // From server
     ////////////////////
-    public void processMessage(String message, GameData data);
+    public void processMessages(GameData data);
 }
