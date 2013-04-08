@@ -21,23 +21,6 @@ public class ClientMain {
 
     public static void main(String[] args) {
 
-        try {
-            // four elements of asshole
-            final WorldModel model = new WorldModel();
-            final Queue<JSONArray> in = new ConcurrentLinkedQueue<>();
-            final Queue<JSONObject> out = new ConcurrentLinkedQueue<>();
-            //final Socket socket = new Socket("sorseg.dyndns.org", 8888);
-            final Socket socket = new Socket("localhost", 8888);
-
-            // three elements of bitches
-            new ServerReader(in, socket).start();
-            new GameEngine(in, out, model).start();
-            new ServerWriter(out, socket).start();
-
-
-        } catch (IOException | JSONException e) {
-            e.printStackTrace();  //Tofuck
-        }
 
     }
 

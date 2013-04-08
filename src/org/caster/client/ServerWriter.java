@@ -34,7 +34,7 @@ public class ServerWriter extends Thread {
     public void run() {
         while (!ClientMain.DONE) {
             try {
-                Thread.sleep(1000);
+                Thread.sleep(1000); // wtf lol?
                 if (!out.isEmpty()) {
                     String msg = out.poll().toString();
                     logger.info("sent " + msg);

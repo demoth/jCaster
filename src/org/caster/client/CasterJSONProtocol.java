@@ -1,5 +1,9 @@
 package org.caster.client;
 
+import org.json.JSONArray;
+
+import java.util.Queue;
+
 /**
  * Created by IntelliJ IDEA.
  * User: daniil
@@ -7,7 +11,15 @@ package org.caster.client;
  * Time: 21:47
  * To change this template use File | Settings | File Templates.
  */
-public class CasterJSONProtocol implements CasterProtocol{
+public class CasterJSONProtocol implements CasterProtocol {
+    private Queue<JSONArray> in;
+    private Queue<JSONArray> out;
+    
+
+    public CasterJSONProtocol(Queue<JSONArray> in, Queue<JSONArray> out) {
+        this.in = in;
+        this.out = out;
+    }
 
     @Override
     public void chat(String message) {

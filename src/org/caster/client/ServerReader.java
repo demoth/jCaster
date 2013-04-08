@@ -39,7 +39,7 @@ public class ServerReader extends Thread {
                 while (reader.ready()) {
                     in.add(new JSONArray(reader.readLine()));
                 }
-                sleep(1000);
+                sleep(1000); // wtf - sick?
             } catch (IOException e) {
                 e.printStackTrace();  //Todo
             } catch (JSONException e) {
