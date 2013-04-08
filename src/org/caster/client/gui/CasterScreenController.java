@@ -1,4 +1,4 @@
-package org.caster.client;
+package org.caster.client.gui;
 
 import com.jme3.app.state.AbstractAppState;
 import de.lessvoid.nifty.Nifty;
@@ -6,6 +6,7 @@ import de.lessvoid.nifty.controls.DropDown;
 import de.lessvoid.nifty.controls.TextField;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
+import org.caster.client.WorldModel;
 import org.json.JSONException;
 import org.json.JSONObject;
 

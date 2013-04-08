@@ -16,6 +16,7 @@ import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.controls.DropDown;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
+import org.caster.client.gui.CasterScreenController;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
