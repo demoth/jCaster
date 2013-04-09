@@ -4,6 +4,7 @@ import com.jme3.app.state.AbstractAppState;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
+import org.caster.client.GameData;
 
 /**
  * Created by IntelliJ IDEA.
@@ -13,7 +14,11 @@ import de.lessvoid.nifty.screen.ScreenController;
  * Main appstate with 3d objects;
  * implements screencontroller for Hud
  */
-public class InGameState extends AbstractAppState implements ScreenController{
+public class InGameState extends AbstractCasterState implements ScreenController{
+
+    public InGameState(GameData data) {
+        //To change body of created methods use File | Settings | File Templates.
+    }
 
     @Override
     public void bind(Nifty nifty, Screen screen) {

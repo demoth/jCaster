@@ -2,11 +2,67 @@
 <nifty xmlns="http://nifty-gui.sourceforge.net/nifty-1.3.xsd"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://nifty-gui.sourceforge.net/nifty-1.3.xsd http://nifty-gui.sourceforge.net/nifty-1.3.xsd">
-    <screen id="mainmenu">
+<nifty>
+    <!--ID's are written with DASH between words (not camelCase)-->
+    <useControls filename="nifty-default-controls.xml"/>
+    <useStyles filename="nifty-default-styles.xml"/>
+
+    <screen id="main-menu" controller="org.caster.client.gui.MenuScreenController">
         <layer childLayout="center">
-            <panel childLayout="center">
-                <text text="Welcome to Caster 0.00.0.00.0.1" font="Interface/Fonts/Default.fnt"/>
+            <panel childLayout="vertical">
+                <text text="Welcome to Caster 0.0.1" font="Interface/Fonts/Default.fnt"/>
+                <control name="button" id="button-login-screen" label="Login">
+                    <interact onClick="gotoScreen(login-screen)"/>
+                </control>
+                <control name="button" id="button-options" label="Options">
+                    <!--<interact onClick="gotoLoginScreen()"/>-->
+                </control>
+                <control name="button" id="button-quit" label="Quit">
+                    <!--<interact onClick="gotoLoginScreen()"/>-->
+                </control>
             </panel>
         </layer>
     </screen>
-    </nifty>
+
+    <screen id="login-screen" controller="org.caster.client.gui.MenuScreenController">
+        <layer childLayout="center">
+            <panel childLayout="vertical">
+                <text text="Login" font="Interface/Fonts/Default.fnt"/>
+                <panel childLayout="horizontal">
+                    <control name="textfield" id="textfield-username"/>
+                    <control name="textfield" id="textfield-password" passwordChar="*"/>
+                </panel>
+                <panel childLayout="horizontal">
+                    <control name="button" id="button-login" label="Login">
+                        <interact onClick="login()"/>
+                    </control>
+                    <control name="button" id="button-back" label="Back">
+                        <interact onClick="gotoScreen(main-menu)"/>
+                    </control>
+                </panel>
+            </panel>
+        </layer>
+    </screen>
+    <!--TODO-->
+    <screen id="options-screen" controller="org.caster.client.gui.MenuScreenController">
+        <layer childLayout="center">
+            <panel childLayout="vertical">
+                <text text="Options" font="Interface/Fonts/Default.fnt"/>
+                <control name="button" id="button-back" label="Back">
+                    <interact onClick="gotoScreen(main-menu)"/>
+                </control>
+            </panel>
+        </layer>
+    </screen>
+    <!--TODO-->
+    <screen id="char-select-screen" controller="org.caster.client.gui.MenuScreenController">
+        <layer childLayout="center">
+            <panel childLayout="vertical">
+                <text text="Select character" font="Interface/Fonts/Default.fnt"/>
+                <control name="button" id="button-back" label="Back">
+                    <interact onClick="gotoScreen(main-menu)"/>
+                </control>
+            </panel>
+        </layer>
+    </screen>
+</nifty>
