@@ -67,7 +67,7 @@ public class BogusServer extends Thread {
                 String line = reader.readLine();
                 if (line.startsWith(";")) {
                     String pair[] = line.substring(1, line.length()).split("=");
-                    info.put(pair[0], pair[1]);
+                    info.put(pair[0].trim(), pair[1].trim());
                 } else
                     readingInfo = false;
             }
