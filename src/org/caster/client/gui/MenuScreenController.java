@@ -4,6 +4,7 @@ import com.jme3.app.Application;
 import com.jme3.app.state.AbstractAppState;
 import com.jme3.app.state.AppStateManager;
 import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.controls.TextField;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import org.caster.client.CasterApplication;
@@ -20,13 +21,17 @@ import org.caster.client.states.InGameState;
  */
 public class MenuScreenController extends AbstractCasterState implements ScreenController {
 
+    private Nifty nifty;
+    private Screen screen;
+
     public MenuScreenController() {
-        //To change body of created methods use File | Settings | File Templates.
+        this.app = CasterApplication.getInstance();
     }
 
     @Override
     public void bind(Nifty nifty, Screen screen) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        this.nifty = nifty;
+        this.screen = screen;
     }
 
     @Override
@@ -39,10 +44,15 @@ public class MenuScreenController extends AbstractCasterState implements ScreenC
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    /**
-     * disable this state, enable ingamestate
-     */
-    public void startGame() {
 
+    public void gotoScreen(String screen) {
+        nifty.gotoScreen(screen);
+    }
+
+    public void login() {
+        String username = screen.findNiftyControl("textfield-username", TextField.class).getRealText();
+        String password = screen.findNiftyControl("textfield-password", TextField.class).getRealText();
+        app.getProtocol().login(username, password);
+        // do nothing, if we receive confirmation, CasterProtocol class will redirect us from here
     }
 }

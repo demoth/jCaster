@@ -52,27 +52,29 @@ public class CasterJSONProtocol implements CasterProtocol {
     }
 
     @Override
-    public void showInventory() {
+    public void getInventory() {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
-    public void showMap() {
+    public void getTerrain() {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
-    public void showSkills() {
+    public void getSkills() {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
-    public void showStats() {
+    public void getStats() {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
     public void processMessages(GameData data) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        if (!in.isEmpty()) {
+            // todo parse messages
+        }
     }
 }

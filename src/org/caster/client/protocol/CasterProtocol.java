@@ -15,6 +15,13 @@ public interface CasterProtocol {
     ////////////////////
     public void chat(String message);
 
+    /**
+     *
+     *
+     * @param username
+     * @param password
+     * @return "success" or "fail"
+     */
     public void login(String username, String password);
 
     public void join(String charId);
@@ -25,13 +32,13 @@ public interface CasterProtocol {
 
     public void disconnect();
 
-    public void showInventory();
+    public void getInventory();
 
-    public void showMap();
+    public void getTerrain();
 
-    public void showSkills();
+    public void getSkills();
 
-    public void showStats();
+    public void getStats();
 
     ////////////////////
     // From server
