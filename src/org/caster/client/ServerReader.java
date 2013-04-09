@@ -1,8 +1,8 @@
 package org.caster.client;
 
 import org.json.JSONException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -22,13 +22,13 @@ public class ServerReader extends Thread {
 
     private Queue<String> in;
     private BufferedReader reader;
-    private Logger logger;
+   // private Logger logger;
 
     public ServerReader(Queue<String> in, Socket socket) throws IOException, JSONException {
         this.in = in;
         reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        logger = LoggerFactory.getLogger(ServerReader.class);
-        logger.info("ServerReader is up!");
+        //logger = LoggerFactory.getLogger(ServerReader.class);
+        //logger.info("ServerReader is up!");
     }
 
     @Override

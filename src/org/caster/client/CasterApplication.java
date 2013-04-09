@@ -1,11 +1,17 @@
 package org.caster.client;
 
+import com.jme3.app.DebugKeysAppState;
+import com.jme3.app.FlyCamAppState;
 import com.jme3.app.SimpleApplication;
+import com.jme3.app.StatsAppState;
+import com.jme3.app.state.AppState;
 import com.jme3.asset.plugins.FileLocator;
 import com.jme3.niftygui.NiftyJmeDisplay;
 import de.lessvoid.nifty.Nifty;
+import org.caster.client.gui.MenuScreenController;
 import org.caster.client.protocol.CasterJSONProtocol;
 import org.caster.client.protocol.CasterProtocol;
+import org.caster.client.states.InGameState;
 import org.json.JSONException;
 
 import java.io.IOException;
@@ -29,7 +35,15 @@ public class CasterApplication extends SimpleApplication {
     private Queue<String> in;
     private Queue<String> out;
 
+    // States:
+    private InGameState inGameState;
+    private MenuScreenController mainMenuState;
+
     public CasterApplication(CasterProtocol protocol) {
+        super();
+        stateManager.detach(stateManager.getState(StatsAppState.class));
+        stateManager.detach(stateManager.getState(FlyCamAppState.class));
+        stateManager.detach(stateManager.getState(DebugKeysAppState.class));
         this.protocol = protocol;
     }
 
@@ -42,6 +56,8 @@ public class CasterApplication extends SimpleApplication {
         nifty = niftyDisplay.getNifty();
         nifty.fromXml("Interface/gui.xml","mainmenu");
         guiViewPort.addProcessor(niftyDisplay);
+
+        inGameState = new InGameState(data);
 
     }
 
