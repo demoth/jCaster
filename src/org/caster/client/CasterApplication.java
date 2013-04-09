@@ -55,6 +55,7 @@ public class CasterApplication extends SimpleApplication {
         stateManager.detach(stateManager.getState(FlyCamAppState.class));
         stateManager.detach(stateManager.getState(DebugKeysAppState.class));
 
+        data = new GameData();
         this.protocol = protocol;
     }
 

@@ -73,7 +73,7 @@ public class BogusServer extends Thread {
             JSONArray critters = createCreatures();
             JSONObject response = new JSONObject();
             response.put("what", "login")
-                    .append("creatures", critters);
+                    .put("creatures", critters);
             out.add(response.toString());
             loggedIn = true;
         } else {
