@@ -3,6 +3,12 @@ package org.caster.client;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Queue;
 
 /**
@@ -50,7 +56,29 @@ public class BogusServer extends Thread {
     }
 
     private void sendEnvironment() {
-
+        JSONObject response = new JSONObject();
+        response.put("what", "environment");
+        response.put("location", "342f23");
+        try {
+            Character cells[];
+            Map<String, String> info = new HashMap<>();
+            BufferedReader reader = new BufferedReader(new FileReader("Maps/hall.map"));
+            boolean readingInfo = true;
+            while (readingInfo) {
+                String line = reader.readLine();
+                if (line.startsWith(";")) {
+                        String pair[] = line.substring(1, line.length()).split("=");
+                        info.put(pair[0],pair[1]);
+                } else
+                    readingInfo = false;
+            }
+            cells = new Character[Integer.parseInt(info.get("height"))];
+            while (reader.ready()) {
+                // TODO : i'm tired goddamit
+            }
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
     }
 
     private void request(JSONObject object) {
