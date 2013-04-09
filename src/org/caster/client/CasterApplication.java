@@ -36,8 +36,6 @@ public class CasterApplication extends SimpleApplication {
     private CasterProtocol protocol;
     private GameData data;
     private Nifty nifty;
-    private Queue<String> in;
-    private Queue<String> out;
 
     private boolean done;
 
@@ -81,7 +79,7 @@ public class CasterApplication extends SimpleApplication {
         guiViewPort.addProcessor(niftyDisplay);
 
         //stateManager.attach(mainMenuState);
-
+        fakeConnect();
     }
 
     @Override
@@ -92,18 +90,20 @@ public class CasterApplication extends SimpleApplication {
 
     public void connect(String host, int port) throws IOException, JSONException {
         Socket socket = new Socket(host, port);
-        new ServerReader(in, socket).start();
-        new ServerWriter(out, socket).start();
+        //new ServerReader(in, socket).start();
+        //new ServerWriter(out, socket).start();
     }
 
     public void fakeConnect() {
-        new BogusServer(in, out, this).start();
+        //new BogusServer(in, out, this).start();
     }
 
     public static void main(String[] args) throws JSONException {
         Queue<String> in = new ConcurrentLinkedQueue<>();
         Queue<String> out = new ConcurrentLinkedQueue<>();
-        new CasterApplication(new CasterJSONProtocol(in, out)).start();
+        CasterApplication app = new CasterApplication(new CasterJSONProtocol(in, out));
+        app.start();
+        new BogusServer(in, out, app).start();
 
     }
 
