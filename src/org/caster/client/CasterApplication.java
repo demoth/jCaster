@@ -4,18 +4,14 @@ import com.jme3.app.DebugKeysAppState;
 import com.jme3.app.FlyCamAppState;
 import com.jme3.app.SimpleApplication;
 import com.jme3.app.StatsAppState;
-import com.jme3.app.state.AppState;
 import com.jme3.asset.plugins.FileLocator;
 import com.jme3.niftygui.NiftyJmeDisplay;
 import de.lessvoid.nifty.Nifty;
-import org.caster.client.gui.MenuScreenController;
 import org.caster.client.protocol.CasterJSONProtocol;
 import org.caster.client.protocol.CasterProtocol;
 import org.caster.client.states.InGameState;
 import org.json.JSONException;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.Queue;
@@ -80,7 +76,7 @@ public class CasterApplication extends SimpleApplication {
         guiViewPort.addProcessor(niftyDisplay);
 
         //stateManager.attach(mainMenuState);
-        fakeConnect();
+        fakeConnect(); // todo remove debug
     }
 
     @Override
