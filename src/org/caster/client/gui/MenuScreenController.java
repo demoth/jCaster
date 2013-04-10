@@ -1,16 +1,11 @@
 package org.caster.client.gui;
 
-import com.jme3.app.Application;
-import com.jme3.app.state.AbstractAppState;
-import com.jme3.app.state.AppStateManager;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.controls.TextField;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import org.caster.client.CasterApplication;
-import org.caster.client.GameData;
 import org.caster.client.states.AbstractCasterState;
-import org.caster.client.states.InGameState;
 
 /**
  * Created by IntelliJ IDEA.
@@ -50,8 +45,8 @@ public class MenuScreenController extends AbstractCasterState implements ScreenC
     }
 
     public void login() {
-        String username = screen.findNiftyControl("textfield-username", TextField.class).getRealText();
-        String password = screen.findNiftyControl("textfield-password", TextField.class).getRealText();
+        String username = screen.findNiftyControl("textfield-username", TextField.class).getText();
+        String password = screen.findNiftyControl("textfield-password", TextField.class).getText();
         app.getProtocol().login(username, password);
         // do nothing, if we receive confirmation, CasterProtocol class will redirect us from here
     }

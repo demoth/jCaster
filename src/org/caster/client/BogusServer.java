@@ -4,7 +4,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
@@ -62,13 +61,13 @@ public class BogusServer extends Thread {
         try {
             Character cells[];
             Map<String, String> info = new HashMap<>();
-            BufferedReader reader = new BufferedReader(new FileReader("Maps/hall.map"));
+            BufferedReader reader = new BufferedReader(new FileReader("assets/Maps/hall.map"));
             boolean readingInfo = true;
             while (readingInfo) {
                 String line = reader.readLine();
                 if (line.startsWith(";")) {
-                        String pair[] = line.substring(1, line.length()).split("=");
-                        info.put(pair[0],pair[1]);
+                    String pair[] = line.substring(1, line.length()).split("=");
+                    info.put(pair[0].trim(), pair[1].trim());
                 } else
                     readingInfo = false;
             }

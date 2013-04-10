@@ -12,12 +12,11 @@ import java.util.Queue;
  * User: daniil
  * Date: 08.04.13
  * Time: 21:47
- * To change this template use File | Settings | File Templates.
  */
 public class CasterJSONProtocol implements CasterProtocol {
     private Queue<String> in;
     private Queue<String> out;
-    
+
 
     public CasterJSONProtocol(Queue<String> in, Queue<String> out) {
         this.in = in;
@@ -82,7 +81,7 @@ public class CasterJSONProtocol implements CasterProtocol {
             JSONObject o = new JSONObject(in.poll());
             switch (o.getString("what")) {
                 case "login":
-                    addCreatures(o,data);
+                    addCreatures(o, data);
                     break;
             }
         }
