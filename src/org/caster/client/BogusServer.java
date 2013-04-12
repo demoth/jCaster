@@ -3,11 +3,6 @@ package org.caster.client;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Queue;
 
 /**
@@ -59,17 +54,17 @@ public class BogusServer extends Thread {
         response.put("what", "environment");
         response.put("location", "342f23");
         response.put("turn", 12421);
-        char line1[] = {'#','#','#','#','#','#','#','#','#','#','#','#'};
-        char line2[] = {'#','.','.','.','.','.','.','.','#','#','#','#'};
-        char line3[] = {'#','#','#','#','.','.','#','#','#','#','.','#'};
-        char line4[] = {'#','.','.','#','.','.','.','.','.','.','.','#'};
-        char line5[] = {'#','.','.','.','.','.','.','#','#','.','.','#'};
-        char line6[] = {'#','#','#','#','.','#','.','#','.','#','.','#'};
-        char line7[] = {'#','.','.','.','.','#','#','#','.','#','.','#'};
-        char line8[] = {'#','#','#','#','#','#','#','#','#','#','#','#'};
+        char line1[] = {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'};
+        char line2[] = {'#', '.', '.', '.', '.', '.', '.', '.', '#', '#', '#', '#'};
+        char line3[] = {'#', '#', '#', '#', '.', '.', '#', '#', '#', '#', '.', '#'};
+        char line4[] = {'#', '.', '.', '#', '.', '.', '.', '.', '.', '.', '.', '#'};
+        char line5[] = {'#', '.', '.', '.', '.', '.', '.', '#', '#', '.', '.', '#'};
+        char line6[] = {'#', '#', '#', '#', '.', '#', '.', '#', '.', '#', '.', '#'};
+        char line7[] = {'#', '.', '.', '.', '.', '#', '#', '#', '.', '#', '.', '#'};
+        char line8[] = {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'};
         char maps[][] = {line1, line2, line3, line4, line5, line6, line7, line8};
-        int width = 12, heigth = 8;
-        for (int i = 0; i < heigth; i++) {
+        int width = 12, height = 8;
+        for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 JSONObject cell = new JSONObject();
                 if (maps[i][j] == '#') {
@@ -107,7 +102,7 @@ public class BogusServer extends Thread {
             response.put("what", "login")
                     .put("creatures", critters);
             out.add(response.toString());
-            loggedIn = true;
+            //loggedIn = true;
         } else {
             System.out.println("WRONG USER");
         }

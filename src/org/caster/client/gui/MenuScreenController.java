@@ -1,11 +1,14 @@
 package org.caster.client.gui;
 
 import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.controls.ListBox;
 import de.lessvoid.nifty.controls.TextField;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import org.caster.client.CasterApplication;
 import org.caster.client.states.AbstractCasterState;
+
+import java.util.Map;
 
 /**
  * Created by IntelliJ IDEA.
@@ -31,12 +34,14 @@ public class MenuScreenController extends AbstractCasterState implements ScreenC
 
     @Override
     public void onStartScreen() {
-        //To change body of implemented methods use File | Settings | File Templates.
+        app.getStateManager().attach(this);
+        System.out.println("attached: " + screen.getScreenId());
     }
 
     @Override
     public void onEndScreen() {
-        //To change body of implemented methods use File | Settings | File Templates.
+        app.getStateManager().detach(this);
+        System.out.println("detached: " + screen.getScreenId());
     }
 
 
@@ -44,10 +49,43 @@ public class MenuScreenController extends AbstractCasterState implements ScreenC
         nifty.gotoScreen(screen);
     }
 
+    public void join() {
+
+    }
+
     public void login() {
-        String username = screen.findNiftyControl("textfield-username", TextField.class).getText();
-        String password = screen.findNiftyControl("textfield-password", TextField.class).getText();
+        String username = screen.findNiftyControl("textfield-username", TextField.class).getRealText();
+        String password = screen.findNiftyControl("textfield-password", TextField.class).getRealText();
         app.getProtocol().login(username, password);
+        nifty.gotoScreen("char-select-screen");
         // do nothing, if we receive confirmation, CasterProtocol class will redirect us from here
+    }
+
+    private class ListItem {
+        public String name;
+        public String id;
+
+        private ListItem(String name, String id) {
+            this.name = name;
+            this.id = id;
+        }
+
+        @Override
+        public String toString() {
+            return name;
+        }
+    }
+
+    @Override
+    public void update(float tpf) {
+        if (app.getData().loggedIn) {
+            ListBox<ListItem> listbox = screen.findNiftyControl("listbox-select", ListBox.class);
+            for (Map.Entry<String, Map<String, String>> crit : app.getData().creatures.entrySet()) {
+                String id = crit.getKey();
+                String name = crit.getValue().get("name");
+                listbox.addItem(new ListItem(name, id));
+            }
+            app.getData().loggedIn = false;
+        }
     }
 }

@@ -1,5 +1,6 @@
 package org.caster.client.protocol;
 
+import org.caster.client.CasterApplication;
 import org.caster.client.GameData;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -113,6 +114,9 @@ public class CasterJSONProtocol implements CasterProtocol {
             map.put("model", crit.getString("model"));
 
             data.creatures.put(crit.getString("id"), map);
+            data.loggedIn = true;
+
+
         }
     }
 }

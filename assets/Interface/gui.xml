@@ -28,8 +28,8 @@
             <panel childLayout="vertical" width="50%">
                 <text text="Login" font="Interface/Fonts/Default.fnt"/>
                 <panel childLayout="horizontal">
-                    <control name="textfield" id="textfield-username"/>
-                    <control name="textfield" id="textfield-password" passwordChar="*"/>
+                    <control name="textfield" id="textfield-username" text="demoth"/>
+                    <control name="textfield" id="textfield-password" text="1234" passwordChar="*"/>
                 </panel>
                 <panel childLayout="horizontal">
                     <control name="button" id="button-login" label="Login">
@@ -58,9 +58,21 @@
         <layer childLayout="center">
             <panel childLayout="vertical">
                 <text text="Select character" font="Interface/Fonts/Default.fnt"/>
+                <control name="listBox" id="listbox-select"/>
+                <control name="button" id="button-join" label="Join">
+                    <interact onClick="join()"/>
+                </control>
                 <control name="button" id="button-back" label="Back">
                     <interact onClick="gotoScreen(main-menu)"/>
                 </control>
+            </panel>
+        </layer>
+    </screen>
+
+    <screen id="hud">
+        <layer childLayout="vertical">
+            <panel childLayout="center">
+                <text text="Ingame hud" font="Interface/Fonts/Default.fnt"/>
             </panel>
         </layer>
     </screen>
