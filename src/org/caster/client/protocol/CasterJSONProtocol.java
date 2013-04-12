@@ -83,8 +83,24 @@ public class CasterJSONProtocol implements CasterProtocol {
                 case "login":
                     addCreatures(o, data);
                     break;
+                case "environment":
+                    addEnvironment(o, data);
             }
         }
+    }
+
+    private void addEnvironment(JSONObject o, GameData data) {
+        data.location = o.getString("location");
+        data.turn = o.getInt("turn");
+        JSONArray cells = o.getJSONArray("cells");
+        for (int i = 0; i < cells.length(); i++) {
+            JSONObject cell = cells.getJSONObject(i);
+            addCell(cell, data);
+        }
+    }
+
+    private void addCell(JSONObject cell, GameData data) {
+        System.out.println("Added: " + cell.get("type"));
     }
 
     private void addCreatures(JSONObject o, GameData data) {

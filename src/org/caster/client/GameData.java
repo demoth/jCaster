@@ -17,4 +17,6 @@ public class GameData {
     public Node worldNode;
 
     public Map<String,Map<String, String>> creatures = new HashMap<>();
+    public String location;
+    public int turn;
 }

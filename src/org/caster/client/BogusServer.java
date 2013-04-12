@@ -47,7 +47,7 @@ public class BogusServer extends Thread {
                 sendEnvironment();
             }
             try {
-                sleep(1000);
+                sleep(10000);
             } catch (InterruptedException e) {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }
@@ -58,26 +58,31 @@ public class BogusServer extends Thread {
         JSONObject response = new JSONObject();
         response.put("what", "environment");
         response.put("location", "342f23");
-        try {
-            Character cells[];
-            Map<String, String> info = new HashMap<>();
-            BufferedReader reader = new BufferedReader(new FileReader("assets/Maps/hall.map"));
-            boolean readingInfo = true;
-            while (readingInfo) {
-                String line = reader.readLine();
-                if (line.startsWith(";")) {
-                    String pair[] = line.substring(1, line.length()).split("=");
-                    info.put(pair[0].trim(), pair[1].trim());
-                } else
-                    readingInfo = false;
+        response.put("turn", 12421);
+        char line1[] = {'#','#','#','#','#','#','#','#','#','#','#','#'};
+        char line2[] = {'#','.','.','.','.','.','.','.','#','#','#','#'};
+        char line3[] = {'#','#','#','#','.','.','#','#','#','#','.','#'};
+        char line4[] = {'#','.','.','#','.','.','.','.','.','.','.','#'};
+        char line5[] = {'#','.','.','.','.','.','.','#','#','.','.','#'};
+        char line6[] = {'#','#','#','#','.','#','.','#','.','#','.','#'};
+        char line7[] = {'#','.','.','.','.','#','#','#','.','#','.','#'};
+        char line8[] = {'#','#','#','#','#','#','#','#','#','#','#','#'};
+        char maps[][] = {line1, line2, line3, line4, line5, line6, line7, line8};
+        int width = 12, heigth = 8;
+        for (int i = 0; i < heigth; i++) {
+            for (int j = 0; j < width; j++) {
+                JSONObject cell = new JSONObject();
+                if (maps[i][j] == '#') {
+                    cell.put("type", "wall");
+                } else {
+                    cell.put("type", "floor");
+                }
+                cell.append("coords", i).append("coords", j);
+                response.append("cells", cell);
             }
-            cells = new Character[Integer.parseInt(info.get("height"))];
-            while (reader.ready()) {
-                // TODO : i'm tired goddamit
-            }
-        } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
+
+        out.add(response.toString());
     }
 
     private void request(JSONObject object) {
