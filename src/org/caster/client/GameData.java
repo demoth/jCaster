@@ -16,7 +16,7 @@ public class GameData {
     public Node playerNode;
     public Node worldNode;
 
-    public Map<String, Map<String, String>> creatures = new HashMap<>();
+    public Map<Integer, HashMap<String, String>> creatures = new HashMap<>();
     public String location;
     public int turn;
 

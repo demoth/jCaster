@@ -31,6 +31,20 @@ public class ServerWriter extends Thread {
 
     @Override
     public void run() {
-
+        while (!CasterApplication.getInstance().done) {
+            if (!out.isEmpty()) {
+                try {
+                    writer.write(out.poll() + "\n");
+                    writer.flush();
+                } catch (IOException e) {
+                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
+            }
+            try {
+                sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
+        }
     }
 }

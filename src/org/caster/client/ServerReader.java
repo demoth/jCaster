@@ -1,6 +1,7 @@
 package org.caster.client;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
 
@@ -33,6 +34,16 @@ public class ServerReader extends Thread {
 
     @Override
     public void run() {
+        while (!CasterApplication.getInstance().done) {
+            try {
+                if (reader.ready()) {
+                    in.add(reader.readLine());
+                }
+                sleep(1000);
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
 
+        }
     }
 }

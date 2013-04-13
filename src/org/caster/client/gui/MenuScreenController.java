@@ -8,6 +8,7 @@ import de.lessvoid.nifty.screen.ScreenController;
 import org.caster.client.CasterApplication;
 import org.caster.client.states.AbstractCasterState;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -63,9 +64,9 @@ public class MenuScreenController extends AbstractCasterState implements ScreenC
 
     private class ListItem {
         public String name;
-        public String id;
+        public Integer id;
 
-        private ListItem(String name, String id) {
+        private ListItem(String name, Integer id) {
             this.name = name;
             this.id = id;
         }
@@ -80,8 +81,8 @@ public class MenuScreenController extends AbstractCasterState implements ScreenC
     public void update(float tpf) {
         if (app.getData().loggedIn) {
             ListBox<ListItem> listbox = screen.findNiftyControl("listbox-select", ListBox.class);
-            for (Map.Entry<String, Map<String, String>> crit : app.getData().creatures.entrySet()) {
-                String id = crit.getKey();
+            for (Map.Entry<Integer, HashMap<String, String>> crit : app.getData().creatures.entrySet()) {
+                Integer id = crit.getKey();
                 String name = crit.getValue().get("name");
                 listbox.addItem(new ListItem(name, id));
             }

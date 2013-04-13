@@ -1,6 +1,5 @@
 package org.caster.client.protocol;
 
-import org.caster.client.CasterApplication;
 import org.caster.client.GameData;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -32,7 +31,7 @@ public class CasterJSONProtocol implements CasterProtocol {
     @Override
     public void login(String username, String password) {
         JSONObject request = new JSONObject();
-        request.put("what", "login").put("login", username).put("password", password);
+        request.put("what", "login").put("login", username).put("passw", password);
         out.add(request.toString());
     }
 
@@ -84,8 +83,12 @@ public class CasterJSONProtocol implements CasterProtocol {
                 case "login":
                     addCreatures(o, data);
                     break;
+                case "joined":
+
+                    break;
                 case "environment":
                     addEnvironment(o, data);
+                    break;
             }
         }
     }
@@ -113,7 +116,7 @@ public class CasterJSONProtocol implements CasterProtocol {
             map.put("name", crit.getString("name"));
             map.put("model", crit.getString("model"));
 
-            data.creatures.put(crit.getString("id"), map);
+            data.creatures.put(crit.getInt("id"), map);
             data.loggedIn = true;
 
 

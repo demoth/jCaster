@@ -29,7 +29,7 @@
                 <text text="Login" font="Interface/Fonts/Default.fnt"/>
                 <panel childLayout="horizontal">
                     <control name="textfield" id="textfield-username" text="demoth"/>
-                    <control name="textfield" id="textfield-password" text="1234" passwordChar="*"/>
+                    <control name="textfield" id="textfield-password" text="asdf" passwordChar="*"/>
                 </panel>
                 <panel childLayout="horizontal">
                     <control name="button" id="button-login" label="Login">

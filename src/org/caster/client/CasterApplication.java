@@ -33,7 +33,7 @@ public class CasterApplication extends SimpleApplication {
     private GameData data;
     private Nifty nifty;
 
-    private boolean done;
+    public boolean done;
 
     // this shit is needed, because we cannot initialize AbstractState-ScreenControllers,as they are created automatically
     private static CasterApplication instance;
@@ -76,7 +76,7 @@ public class CasterApplication extends SimpleApplication {
         guiViewPort.addProcessor(niftyDisplay);
 
         //stateManager.attach(mainMenuState);
-        fakeConnect(); // todo remove debug
+        //fakeConnect(); // todo remove debug
     }
 
     @Override
@@ -86,21 +86,29 @@ public class CasterApplication extends SimpleApplication {
     }
 
     public void connect(String host, int port) throws IOException, JSONException {
+/*
         Socket socket = new Socket(host, port);
-        //new ServerReader(in, socket).start();
-        //new ServerWriter(out, socket).start();
+        new ServerReader(in, socket).start();
+        new ServerWriter(out, socket).start();
+*/
     }
 
     public void fakeConnect() {
         //new BogusServer(in, out, this).start();
     }
 
-    public static void main(String[] args) throws JSONException {
+    public static void main(String[] args) throws JSONException, IOException {
         Queue<String> in = new ConcurrentLinkedQueue<>();
         Queue<String> out = new ConcurrentLinkedQueue<>();
         CasterApplication app = new CasterApplication(new CasterJSONProtocol(in, out));
         app.start();
-        new BogusServer(in, out, app).start();
+        //new BogusServer(in, out, app).start();
+
+        Socket socket = new Socket("192.168.1.2", 8889);
+        new ServerReader(in, socket).start();
+        new ServerWriter(out, socket).start();
+
+
 
     }
 
