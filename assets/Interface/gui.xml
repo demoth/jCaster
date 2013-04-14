@@ -56,7 +56,7 @@
     <!--TODO-->
     <screen id="char-select-screen" controller="org.caster.client.gui.MenuScreenController">
         <layer childLayout="center">
-            <panel childLayout="vertical">
+            <panel childLayout="vertical" width="50%">
                 <text text="Select character" font="Interface/Fonts/Default.fnt"/>
                 <control name="listBox" id="listbox-select"/>
                 <control name="button" id="button-join" label="Join">

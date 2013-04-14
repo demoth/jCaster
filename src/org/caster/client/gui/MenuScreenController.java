@@ -36,13 +36,13 @@ public class MenuScreenController extends AbstractCasterState implements ScreenC
     @Override
     public void onStartScreen() {
         app.getStateManager().attach(this);
-        System.out.println("attached: " + screen.getScreenId());
+        //System.out.println("attached: " + screen.getScreenId());
     }
 
     @Override
     public void onEndScreen() {
         app.getStateManager().detach(this);
-        System.out.println("detached: " + screen.getScreenId());
+        //System.out.println("detached: " + screen.getScreenId());
     }
 
 

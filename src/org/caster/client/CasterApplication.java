@@ -104,7 +104,7 @@ public class CasterApplication extends SimpleApplication {
         app.start();
         //new BogusServer(in, out, app).start();
 
-        Socket socket = new Socket("192.168.1.2", 8889);
+        Socket socket = new Socket("localhost", 8889);
         new ServerReader(in, socket).start();
         new ServerWriter(out, socket).start();
 

@@ -41,7 +41,7 @@ public class ServerWriter extends Thread {
                 }
             }
             try {
-                sleep(1000);
+                sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }

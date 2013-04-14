@@ -39,7 +39,7 @@ public class ServerReader extends Thread {
                 if (reader.ready()) {
                     in.add(reader.readLine());
                 }
-                sleep(1000);
+                sleep(100);
             } catch (IOException | InterruptedException e) {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }

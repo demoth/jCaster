@@ -10,7 +10,6 @@ import java.util.Map;
  * User: daniil
  * Date: 08.04.13
  * Time: 22:03
- * To change this template use File | Settings | File Templates.
  */
 public class GameData {
     public Node playerNode;
@@ -20,5 +19,6 @@ public class GameData {
     public String location;
     public int turn;
 
+    // Used in menuscreencontroller for indication that client should populate creature-list-box
     public boolean loggedIn = false;
 }
