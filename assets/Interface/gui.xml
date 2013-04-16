@@ -17,7 +17,7 @@
                     <!--<interact onClick="gotoLoginScreen()"/>-->
                 </control>
                 <control name="button" id="button-quit" label="Quit">
-                    <!--<interact onClick="gotoLoginScreen()"/>-->
+                    <interact onClick="quit()"/>
                 </control>
             </panel>
         </layer>
@@ -58,7 +58,7 @@
         <layer childLayout="center">
             <panel childLayout="vertical" width="50%">
                 <text text="Select character" font="Interface/Fonts/Default.fnt"/>
-                <control name="listBox" id="listbox-select"/>
+                <control name="listBox" id="listbox-select" horizontal="off" selectionMode="Single"/>
                 <control name="button" id="button-join" label="Join">
                     <interact onClick="join()"/>
                 </control>
@@ -69,7 +69,7 @@
         </layer>
     </screen>
 
-    <screen id="hud">
+    <screen id="hud" controller="org.caster.client.states.InGameState">
         <layer childLayout="vertical">
             <panel childLayout="center">
                 <text text="Ingame hud" font="Interface/Fonts/Default.fnt"/>

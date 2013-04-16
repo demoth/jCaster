@@ -9,6 +9,7 @@ import org.caster.client.CasterApplication;
 import org.caster.client.states.AbstractCasterState;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -51,7 +52,11 @@ public class MenuScreenController extends AbstractCasterState implements ScreenC
     }
 
     public void join() {
-
+        ListBox<ListItem> listBox = screen.findNiftyControl("listbox-select", ListBox.class);
+        List<ListItem> items = listBox.getSelection();
+        // here we assume that "selectionMode" is "Single" (!!!)
+        app.getProtocol().join(items.get(0).id);
+        nifty.gotoScreen("hud");
     }
 
     public void login() {
@@ -88,5 +93,9 @@ public class MenuScreenController extends AbstractCasterState implements ScreenC
             }
             app.getData().loggedIn = false;
         }
+    }
+
+    public void quit() {
+        CasterApplication.getInstance().stop();
     }
 }

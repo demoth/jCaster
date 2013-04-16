@@ -1,5 +1,10 @@
 package org.caster.client.protocol;
 
+import com.jme3.app.FlyCamAppState;
+import com.jme3.asset.AssetManager;
+import com.jme3.material.Material;
+import com.jme3.scene.Spatial;
+import org.caster.client.CasterApplication;
 import org.caster.client.GameData;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -17,6 +22,7 @@ public class CasterJSONProtocol implements CasterProtocol {
     private Queue<String> in;
     private Queue<String> out;
 
+    private AssetManager am;
 
     public CasterJSONProtocol(Queue<String> in, Queue<String> out) {
         this.in = in;
@@ -36,8 +42,10 @@ public class CasterJSONProtocol implements CasterProtocol {
     }
 
     @Override
-    public void join(String charId) {
-        //To change body of implemented methods use File | Settings | File Templates.
+    public void join(Integer charId) {
+        JSONObject request = new JSONObject();
+        request.put("what", "join").put("crid", charId);
+        out.add(request.toString());
     }
 
     @Override
@@ -84,17 +92,19 @@ public class CasterJSONProtocol implements CasterProtocol {
                     addCreatures(o, data);
                     break;
                 case "joined":
-
+                    CasterApplication.getInstance().getStateManager().attach(new FlyCamAppState());
                     break;
                 case "environment":
                     addEnvironment(o, data);
                     break;
+                default:
+                    System.out.println("Got: " + o.toString());
             }
         }
     }
 
     private void addEnvironment(JSONObject o, GameData data) {
-        data.location = o.getString("location");
+        data.location = o.getInt("location");
         data.turn = o.getInt("turn");
         JSONArray cells = o.getJSONArray("cells");
         for (int i = 0; i < cells.length(); i++) {
@@ -104,7 +114,17 @@ public class CasterJSONProtocol implements CasterProtocol {
     }
 
     private void addCell(JSONObject cell, GameData data) {
-        System.out.println("Added: " + cell.get("type"));
+        am = CasterApplication.getInstance().getAssetManager();
+        Spatial tile = am.loadModel("Models/Terrain/" + cell.getString("type") + ".obj");
+        Material material = new Material(am, "Common/MatDefs/Misc/Unshaded.j3md");
+        material.setTexture("ColorMap", am.loadTexture("Textures/" + cell.getString("type") + ".jpg"));
+        tile.setMaterial(material);
+        JSONArray coords = cell.getJSONArray("coords");
+        float x = (float) coords.getDouble(0);
+        float y = (float) coords.getDouble(1);
+        tile.setLocalTranslation(x, 0.0f, y);
+        data.worldNode.attachChild(tile);
+        //System.out.println("Added: " + cell.get("type"));
     }
 
     private void addCreatures(JSONObject o, GameData data) {
@@ -121,5 +141,9 @@ public class CasterJSONProtocol implements CasterProtocol {
 
 
         }
+    }
+
+    public void setAm(AssetManager am) {
+        this.am = am;
     }
 }

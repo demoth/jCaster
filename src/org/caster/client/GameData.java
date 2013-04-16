@@ -1,6 +1,8 @@
 package org.caster.client;
 
+import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
+import com.jme3.scene.Spatial;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,9 +18,15 @@ public class GameData {
     public Node worldNode;
 
     public Map<Integer, HashMap<String, String>> creatures = new HashMap<>();
-    public String location;
+    public Integer location;
     public int turn;
 
     // Used in menuscreencontroller for indication that client should populate creature-list-box
     public boolean loggedIn = false;
+
+    public HashMap<String, Spatial> terrains;
+
+    public GameData() {
+
+    }
 }

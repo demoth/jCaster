@@ -46,5 +46,6 @@ public class ServerWriter extends Thread {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }
         }
+        System.out.println("done writing");
     }
 }

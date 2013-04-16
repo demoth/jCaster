@@ -4,9 +4,12 @@ import com.jme3.app.DebugKeysAppState;
 import com.jme3.app.FlyCamAppState;
 import com.jme3.app.SimpleApplication;
 import com.jme3.app.StatsAppState;
+import com.jme3.app.state.AbstractAppState;
 import com.jme3.asset.plugins.FileLocator;
 import com.jme3.niftygui.NiftyJmeDisplay;
+import com.jme3.scene.Node;
 import de.lessvoid.nifty.Nifty;
+import org.caster.client.gui.MenuScreenController;
 import org.caster.client.protocol.CasterJSONProtocol;
 import org.caster.client.protocol.CasterProtocol;
 import org.caster.client.states.InGameState;
@@ -51,7 +54,10 @@ public class CasterApplication extends SimpleApplication {
         stateManager.detach(stateManager.getState(FlyCamAppState.class));
         stateManager.detach(stateManager.getState(DebugKeysAppState.class));
 
+        protocol.setAm(assetManager);
         data = new GameData();
+        data.worldNode = new Node();
+        rootNode.attachChild(data.worldNode);
         this.protocol = protocol;
     }
 
@@ -80,6 +86,12 @@ public class CasterApplication extends SimpleApplication {
     }
 
     @Override
+    public void stop() {
+        done = true;
+        super.stop();    // wtf? core dumped here TODO: FIX
+    }
+
+    @Override
     public void update() {
         super.update();
         protocol.processMessages(data);
@@ -98,16 +110,17 @@ public class CasterApplication extends SimpleApplication {
     }
 
     public static void main(String[] args) throws JSONException, IOException {
+
         Queue<String> in = new ConcurrentLinkedQueue<>();
         Queue<String> out = new ConcurrentLinkedQueue<>();
-        CasterApplication app = new CasterApplication(new CasterJSONProtocol(in, out));
+        CasterJSONProtocol casterJSONProtocol = new CasterJSONProtocol(in, out);
+        CasterApplication app = new CasterApplication(casterJSONProtocol);
         app.start();
         //new BogusServer(in, out, app).start();
 
         Socket socket = new Socket("localhost", 8889);
         new ServerReader(in, socket).start();
         new ServerWriter(out, socket).start();
-
 
 
     }

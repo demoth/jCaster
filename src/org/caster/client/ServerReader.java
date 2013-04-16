@@ -23,7 +23,7 @@ public class ServerReader extends Thread {
 
     private Queue<String> in;
     private BufferedReader reader;
-   // private Logger logger;
+    // private Logger logger;
 
     public ServerReader(Queue<String> in, Socket socket) throws IOException, JSONException {
         this.in = in;
@@ -45,5 +45,6 @@ public class ServerReader extends Thread {
             }
 
         }
+        System.out.println("done reading");
     }
 }

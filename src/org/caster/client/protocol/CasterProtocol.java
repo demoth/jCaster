@@ -1,5 +1,6 @@
 package org.caster.client.protocol;
 
+import com.jme3.asset.AssetManager;
 import org.caster.client.GameData;
 
 /**
@@ -9,6 +10,8 @@ import org.caster.client.GameData;
  * Time: 21:48
  */
 public interface CasterProtocol {
+    // MISC
+    public void setAm(AssetManager am);
 
     ////////////////////
     // From client
@@ -16,15 +19,13 @@ public interface CasterProtocol {
     public void chat(String message);
 
     /**
-     *
-     *
      * @param username
      * @param password
      * @return "success" or "fail"
      */
     public void login(String username, String password);
 
-    public void join(String charId);
+    public void join(Integer charId);
 
     public void createCharacter(String properties);
 
